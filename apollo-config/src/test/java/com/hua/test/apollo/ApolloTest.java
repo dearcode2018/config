@@ -23,6 +23,8 @@ import static org.junit.Assert.fail;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.ctrip.framework.apollo.Config;
+import com.ctrip.framework.apollo.ConfigService;
 import com.hua.test.BaseTest;
 
 
@@ -43,7 +45,7 @@ public final class ApolloTest extends BaseTest {
 	@Test
 	public void testReadConfig() {
 		try {
-			//Config config = ConfigService.getAppConfig(); //ConfigService.getConfig(Namespace);
+			Config config = ConfigService.getAppConfig(); //ConfigService.getConfig(Namespace);
 			String key = "key"; //key
 			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
 			//String value = config.getProperty(key, defaultValue);

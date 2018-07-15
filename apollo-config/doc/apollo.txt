@@ -13,8 +13,16 @@ https://github.com/ctripcorp/apollo/wiki/Quick-Start
 
 
 
-
-
+将携程apollo项目下载下来，在maven settings中配置下载仓库，然后将项目导入eclipse
+	<profile>
+		<id>ctrip</id>
+			<repositories>
+				<repository>
+					<id>internal.repo</id>
+					<url>https://raw.github.com/ctripcorp/apollo/mvn-repo/</url>
+				</repository>				
+			</repositories>
+	</profile>
 
 
 
