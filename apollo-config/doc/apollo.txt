@@ -9,6 +9,35 @@ DEV(开发) / FAT(功能测试) / UAT(回归测试) / PRO(生产)
 apollo服务端部署指引
 https://github.com/ctripcorp/apollo/wiki/Quick-Start
 
+1.下载Quick Start安装包
+
+2.导入数据
+
+3.修改配置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
