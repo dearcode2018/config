@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * ApolloTest.java
+ * TemplateTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.apollo;
+package template.code;
 
 // 静态导入
 import static org.junit.Assert.assertArrayEquals;
@@ -23,88 +23,17 @@ import static org.junit.Assert.fail;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.ConfigChangeListener;
-import com.ctrip.framework.apollo.ConfigService;
-import com.ctrip.framework.apollo.model.ConfigChange;
-import com.ctrip.framework.apollo.model.ConfigChangeEvent;
 import com.hua.test.BaseTest;
 
 
 /**
- * 描述: Apollo 配置中心 - 测试
+ * 描述: 
  * 
  * @author qye.zheng
- * ApolloTest
+ * TemplateTest
  */
-public final class ApolloTest extends BaseTest {
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testReadConfig() {
-		try {
-			// 设置环境
-			System.setProperty("env", "DEV");
-			
-			Config config = ConfigService.getAppConfig(); //ConfigService.getConfig(Namespace);
-			String key = "config_001"; //key
-			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
-			String value = config.getProperty(key, defaultValue);
-			
-			log.info("testReadConfig =====> value = " + value);
-			
-		} catch (Exception e) {
-			log.error("testReadConfig =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testListenEvent() {
-		try {
-			// 设置环境
-			System.setProperty("env", "DEV");
-			
-			Config config = ConfigService.getAppConfig(); //ConfigService.getConfig(Namespace);
-			String key = "config_001"; //key
-			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
-			ConfigChangeListener listener = new ConfigChangeListener() {
-				/**
-				 * @description 
-				 * @param changeEvent
-				 * @author qianye.zheng
-				 */
-				@Override
-				public void onChange(ConfigChangeEvent changeEvent)
-				{
-					System.out.println("Changes for namespace " + changeEvent.getNamespace());
-					for (String key : changeEvent.changedKeys())
-					{
-						ConfigChange change = changeEvent.getChange(key);
-						System.out.println(String.format("found change - key : %s, oldValue: %s, "
-								+ "newValue: %s, changeType: %s",  change.getPropertyName(), 
-								change.getOldValue(), change.getNewValue(), change.getChangeType()));
-					}
-				}
-			};
-			config.addChangeListener(listener);
-		
-			Thread.sleep(20 * 1000);
-		} catch (Exception e) {
-			log.error("testListenEvent =====> ", e);
-		}
-	}
-	
+public final class TemplateTest extends BaseTest {
+
 	/**
 	 * 
 	 * 描述: 
@@ -118,22 +47,6 @@ public final class ApolloTest extends BaseTest {
 			
 		} catch (Exception e) {
 			log.error("test =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testApollo() {
-		try {
-			
-			
-		} catch (Exception e) {
-			log.error("testApollo =====> ", e);
 		}
 	}
 	

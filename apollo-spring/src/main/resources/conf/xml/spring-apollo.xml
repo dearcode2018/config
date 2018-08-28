@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:apollo="http://www.ctrip.com/schema/apollo"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.ctrip.com/schema/apollo http://www.ctrip.com/schema/apollo.xsd
+	http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context.xsd
+	" default-lazy-init="true">
+	
+	<!-- 扫描注册 -->
+	<context:component-scan base-package="com.hua" />
+	
+	<apollo:config />
+	
+	<!-- 加载配置文件 -->
+	<bean id="propertyPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+		<property name="locations">
+			<list>				
+				<value>classpath:/conf/properties/project.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
