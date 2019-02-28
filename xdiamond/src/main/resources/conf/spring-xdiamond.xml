@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"	
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd	
+	" default-lazy-init="true">
+	
+	<!-- 扫描注册 -->
+	<context:component-scan base-package="com.hua" />
+	
+	<!-- 只能使用一个 配置文件加载器 -->
+	<!-- 加载配置文件 -->
+<!-- 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" >
+		<property name="locations">
+			<list>				
+				<value>classpath:conf/project.properties</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- xdiamond配置 ${}中的配置是通过java 启动命令传入的 
+		java -Dxdiamond.server.host=xx.xx.xx.xx -Dxdiamond.server.port=5678
+		冒号后面表示默认值
+	 -->
+	<bean id="xDiamondConfig" class="io.github.xdiamond.client.spring.XDiamondConfigFactoryBean">
+		<property name="serverHost" value="${xdiamond.server.host:192.168.5.11}" />
+		<!-- 端口，和管理后台端口不同 -->		
+		<property name="serverPort" value="${xdiamond.server.port:5678}" />
+		<property name="groupId" value="${xdiamond.client.groupId:com.hua}" />
+		<property name="artifactId" value="${xdiamond.client.artifactId:xdiamond}" />
+		<property name="version" value="${xdiamond.client.version:1.0}" />
+		<!-- 环境参数: dev | test | yuprod | prod -->
+		<property name="profile" value="${xdiamond.client.profile:dev}" />
+		<!-- 数据传输密钥，在客户端指定 -->		
+		<property name="secretKey" value="${xdiamond.client.secretKey:123456}" />
+		<!-- 以指数退避方式计算重连时间间隔 -->
+		<property name="retryIntervalSeconds" value="5" />
+		<!-- 最大重试时间间隔 -->
+		<property name="maxRetryIntervalSeconds" value="120" />
+		<!-- 默认会无限重试 -->
+		<property name="maxRetryTimes" value="" />
+		<!-- 是否将配置同步到System Properties中，开启可以实现在自定义properties文件中
+		引用XDiamond的配置 例如 testKey=${keyFraomXdiamond}
+		注意: 因为System Properties为公共属性，所以例如在同一个tomcat实例中，
+		则会全局有效
+		 -->
+		<property name="bSyncToSystemProperties" value="true" />
+	</bean>
+
+	<!-- 通过PropertyPlaceholderConfigurer
+		使用XDiamondConfig获取到的配置注入Spring上下文 -->
+	<bean id="xDiamondProperties2Spring" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>				
+				<value>classpath:conf/project.properties</value>
+				<!-- 本地临时修改配置，注意不要提交到真实环境 
+					或保持local.properties文件为空，避免和云配置覆盖 -->
+<!-- 				<value>classpath:local.properties</value>	 -->			
+			</list>
+		</property> 		
+		<!-- 引入XDiamond的配置 -->
+		<property name="properties">
+			<bean id="xDiamondProperties" class="java.util.Properties"
+				 factory-bean="xDiamondConfig" factory-method="getProperties"></bean>			
+		</property>
+	</bean>
+
+
+
+	
+</beans>

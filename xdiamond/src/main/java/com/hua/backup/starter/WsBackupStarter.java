@@ -1,21 +1,22 @@
 /**
  * 描述: 
- * TemplateStarter.java
+ * WsBackupStarter.java
  * @author	qye.zheng
  * 
  *  version 1.0
  */
-package template.code;
+package com.hua.backup.starter;
 
 import org.junit.Test;
 
+import com.hua.backup.driver.BackupDriver;
+
 /**
- * 描述: 启动器
+ * 描述: 当前项目所在的 工作集备份- 启动器
  * @author  qye.zheng
- * 
- * TemplateStarter
+ * WsBackupStarter
  */
-public final class TemplateStarter
+public final class WsBackupStarter
 {
 
 
@@ -26,7 +27,6 @@ public final class TemplateStarter
 	 * 
 	 * 描述: 
 	 * @author qye.zheng
-	 * 
 	 */
 	@Test
 	public void start()
@@ -38,7 +38,7 @@ public final class TemplateStarter
 		/** ===== end of 驱动参数设置 ===== */
 
 		// 启动驱动
-		
+		BackupDriver.backupWorkingsets();
 		
 	}
 

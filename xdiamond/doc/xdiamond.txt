@@ -1,0 +1,25 @@
+
+# 本地配置缓存 路径
+/${user.home}/.xdiamond/${groupId}/${artifactId}/${version}/${env}
+C:\Users\admin\.xdiamond\com.hua\xdiamond\1.0\dev
+config2900301343363671159.tmp
+config2900301343363678481.tmp
+每次启动会重新拉取新配置，若连接xdiamond服务失败，则先到该目录下加载最新的配置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
