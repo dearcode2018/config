@@ -1,6 +1,6 @@
 /**
  * 描述: 
- * XdiamondClientTest.java
+ * XdiamondSpringBootTest.java
  * 
  * @author qye.zheng
  *  version 1.0
@@ -28,9 +28,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.hua.ApplicationStarter;
 import com.hua.config.GlobalConfig;
 import com.hua.test.BaseTest;
 
@@ -39,17 +40,18 @@ import com.hua.test.BaseTest;
  * 描述: 
  * 
  * @author qye.zheng
- * XdiamondClientTest
+ * XdiamondSpringBootTest
  */
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
 // for Junit 5.x
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {
-		"classpath:conf/spring-xdiamond.xml", 
-		})
-public final class XdiamondClientTest extends BaseTest {
+//@WebAppConfiguration(value = "src/main/webapp")
+@SpringBootTest(classes = {ApplicationStarter.class}, 
+webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+//@MapperScan(basePackages = {"com.hua.mapper"})
+public final class XdiamondSpringBootTest extends BaseTest {
 
 	
 	/*
@@ -79,10 +81,6 @@ public final class XdiamondClientTest extends BaseTest {
 	//@Resource
 	//private UserController userController;
 	
-	//@Value("${xdiamond.server.host}")
-	@Value("${a.name}")
-	private String value;
-	
 	/**
 	 * 引当前项目用其他项目之后，然后可以使用
 	 * SpringJunitTest模板测试的其他项目
@@ -92,7 +90,11 @@ public final class XdiamondClientTest extends BaseTest {
 	 * 将目标项目的配置复制到当前项目同一路径下
 	 * 
 	 */
+	//@Value("${xdiamond.server.host}")
+	@Value("${a.name}")
+	private String value;
 	
+
 	/**
 	 * 
 	 * 描述: 
@@ -149,8 +151,7 @@ public final class XdiamondClientTest extends BaseTest {
 		} catch (Exception e) {
 			log.error("testGetValue2 =====> ", e);
 		}
-	}	
-	
+	}		
 	
 	/**
 	 * 

@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * XdiamondClientTest.java
+ * SpringJunit5Test.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.config;
+package template.code;
 
 //静态导入
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -27,11 +27,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.hua.config.GlobalConfig;
 import com.hua.test.BaseTest;
 
 
@@ -39,17 +38,21 @@ import com.hua.test.BaseTest;
  * 描述: 
  * 
  * @author qye.zheng
- * XdiamondClientTest
+ * SpringJunit5Test
  */
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
 // for Junit 5.x
 @ExtendWith(SpringExtension.class)
+@WebAppConfiguration(value = "src/main/webapp")
 @ContextConfiguration(locations = {
-		"classpath:conf/spring-xdiamond.xml", 
+		"classpath:conf/xml/spring-bean.xml", 
+		"classpath:conf/xml/spring-config.xml", 
+		"classpath:conf/xml/spring-mvc.xml", 
+		"classpath:conf/xml/spring-service.xml"
 		})
-public final class XdiamondClientTest extends BaseTest {
+public final class SpringJunit5Test extends BaseTest {
 
 	
 	/*
@@ -79,10 +82,6 @@ public final class XdiamondClientTest extends BaseTest {
 	//@Resource
 	//private UserController userController;
 	
-	//@Value("${xdiamond.server.host}")
-	@Value("${a.name}")
-	private String value;
-	
 	/**
 	 * 引当前项目用其他项目之后，然后可以使用
 	 * SpringJunitTest模板测试的其他项目
@@ -93,63 +92,6 @@ public final class XdiamondClientTest extends BaseTest {
 	 * 
 	 */
 	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testClient() {
-		try {
-			System.out.println(value);
-		} catch (Exception e) {
-			log.error("testClient =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testGetValue() {
-		try {
-			//String value = System.getProperty("a.name");
-			while (true)
-			{
-				String value2 = GlobalConfig.getProperty("a.name2");
-				System.out.println(value2);
-				Thread.sleep(3 * 1000);
-			}
-		} catch (Exception e) {
-			log.error("testGetValue =====> ", e);
-		}
-	}	
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testGetValue2() {
-		try {
-			while (true)
-			{
-				System.out.println(value);
-				Thread.sleep(3 * 1000);
-			}
-		} catch (Exception e) {
-			log.error("testGetValue2 =====> ", e);
-		}
-	}	
 	
 	
 	/**
