@@ -10,6 +10,9 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.hua.util.ReadProperties;
+import com.hua.util.StringUtil;
+
 import io.github.xdiamond.client.XDiamondConfig;
 import io.github.xdiamond.client.spring.XDiamondConfigFactoryBean;
 
@@ -21,6 +24,7 @@ import io.github.xdiamond.client.spring.XDiamondConfigFactoryBean;
 @Configuration
 public class XDiamondConfiguration
 {
+	
 	
 	/**
 	 * 
@@ -34,7 +38,7 @@ public class XDiamondConfiguration
 		final PropertyPlaceholderConfigurer bean = new PropertyPlaceholder();
 		try
 		{
-			XDiamondConfig config = xDiamondConfig().getObject();
+			final XDiamondConfig config = xDiamondConfig().getObject();
 			bean.setProperties(config.getProperties());
 		} catch (Exception e)
 		{
@@ -53,22 +57,28 @@ public class XDiamondConfiguration
 	@Bean
 	public XDiamondConfigFactoryBean xDiamondConfig()
 	{
+		String activeProfile = System.getProperty("spring.profiles.active");
+		if (StringUtil.isEmpty(activeProfile))
+		{
+			 // 默认开发环境
+			activeProfile = "dev";
+		}
+		final ReadProperties props = new ReadProperties("/conf/project.properties");
 		final XDiamondConfigFactoryBean bean = new XDiamondConfigFactoryBean();
-		bean.setServerHost("192.168.5.11");
+		bean.setServerHost(props.getProperty(activeProfile + ".xdiamond.server.host"));
 		// 端口，和管理后台端口不同
-		bean.setServerPort("5678");
-		bean.setGroupId("com.hua");
-		bean.setArtifactId("xdiamond");
-		bean.setVersion("1.0");
+		bean.setServerPort(props.getProperty(activeProfile + ".xdiamond.server.port"));
+		bean.setGroupId(props.getProperty(activeProfile + ".xdiamond.client.groupId"));
+		bean.setArtifactId(props.getProperty(activeProfile + ".xdiamond.client.artifactId"));
+		bean.setVersion(props.getProperty(activeProfile + ".xdiamond.client.version"));
 		// 环境参数: dev | test | yuprod | prod
-		bean.setProfile("dev");
+		bean.setProfile(props.getProperty(activeProfile + ".xdiamond.client.profile"));
 		// 数据传输密钥，在客户端指定
-		bean.setSecretKey("123456");
+		bean.setSecretKey(props.getProperty(activeProfile + ".xdiamond.client.secretKey"));
 		// 以指数退避方式计算重连时间间隔
 		bean.setRetryIntervalSeconds("5");
-		
 		// 最大重试时间间隔
-		bean.setMaxRetryIntervalSeconds("120");
+		bean.setMaxRetryIntervalSeconds(props.getProperty(activeProfile + ".xdiamond.maxRetry.intervalSeconds"));
 		// 最大重试次数，默认会无限重试
 		bean.setMaxRetryTimes("");
 		/*
@@ -81,4 +91,5 @@ public class XDiamondConfiguration
 		
 		return bean;
 	}
+	
 }

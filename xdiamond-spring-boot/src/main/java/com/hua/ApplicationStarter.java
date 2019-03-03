@@ -8,7 +8,6 @@ package com.hua;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
 
  /**
  * @type ApplicationStarter
@@ -41,6 +40,8 @@ public class ApplicationStarter
 	 */
 	public static void main(String[] args)
 	{
+		SpringApplication application = new SpringApplication();
+		//application.setAddCommandLineProperties(true);
 		SpringApplication.run(ApplicationStarter.class, args);
 	}
 	

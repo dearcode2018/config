@@ -3,12 +3,11 @@ server:
   port: 7070
  
   servlet:
-    context-path: /
+    context-path: /xdiamond-spring-boot
  
 spring:
   profiles:
-    active:
-    - dev
+    active: dev
 
   autoconfigure:
     exclude:
@@ -25,7 +24,8 @@ spring:
       - src/main/java
 
 
-
+xdiamond: 
+  serverHost: 192.168.5.11
 
 
 

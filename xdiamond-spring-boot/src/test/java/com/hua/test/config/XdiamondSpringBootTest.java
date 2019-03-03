@@ -46,10 +46,12 @@ import com.hua.test.BaseTest;
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
 // for Junit 5.x
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
 //@WebAppConfiguration(value = "src/main/webapp")
 @SpringBootTest(classes = {ApplicationStarter.class}, 
-webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, 
+	/* 与 junit Debug|Run Configuration -Dspring.profiles.active=dev|test 保持一致 */
+	properties = {"spring.profiles.active=dev"})
 //@MapperScan(basePackages = {"com.hua.mapper"})
 public final class XdiamondSpringBootTest extends BaseTest {
 
@@ -90,11 +92,12 @@ public final class XdiamondSpringBootTest extends BaseTest {
 	 * 将目标项目的配置复制到当前项目同一路径下
 	 * 
 	 */
-	//@Value("${xdiamond.server.host}")
 	@Value("${a.name}")
 	private String value;
 	
-
+	@Value("${spring.profiles.active}")
+	private String profile;
+	
 	/**
 	 * 
 	 * 描述: 
@@ -105,7 +108,11 @@ public final class XdiamondSpringBootTest extends BaseTest {
 	@Test
 	public void testClient() {
 		try {
+			/*
+			 * junit Debug|Run Configuration -Dspring.profiles.active=dev|test
+			 */
 			System.out.println(value);
+			
 		} catch (Exception e) {
 			log.error("testClient =====> ", e);
 		}
@@ -152,6 +159,26 @@ public final class XdiamondSpringBootTest extends BaseTest {
 			log.error("testGetValue2 =====> ", e);
 		}
 	}		
+	
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testProfile() {
+		try {
+			
+			System.out.println(profile);
+			
+		} catch (Exception e) {
+			log.error("testProfile =====> ", e);
+		}
+	}
+	
 	
 	/**
 	 * 
