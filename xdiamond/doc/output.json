@@ -1,0 +1,22 @@
+[ {
+  "key" : "xdiamond.client.profile",
+  "value" : "dev"
+}, {
+  "key" : "xdiamond.server.port",
+  "value" : "5678"
+}, {
+  "key" : "xdiamond.client.artifactId",
+  "value" : "xdiamond"
+}, {
+  "key" : "xdiamond.client.version",
+  "value" : "1.0"
+}, {
+  "key" : "xdiamond.server.host",
+  "value" : "192.168.5.11"
+}, {
+  "key" : "xdiamond.client.groupId",
+  "value" : "com.hua"
+}, {
+  "key" : "xdiamond.client.secretKey",
+  "value" : "123456"
+} ]

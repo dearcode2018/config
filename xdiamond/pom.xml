@@ -23,7 +23,7 @@
 		<maven.plugin.resources.version>2.7</maven.plugin.resources.version>
 		<maven.plugin.dependency.version>2.10</maven.plugin.dependency.version>
 		<maven.plugin.war.version>3.0</maven.plugin.war.version>
-		<xdiamond-client.version>1.0.1</xdiamond-client.version>	
+		<xdiamond-client.version>1.0.4</xdiamond-client.version>	
 	</properties>
 
 <!-- 公共构建 -->
