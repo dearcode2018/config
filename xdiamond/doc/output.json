@@ -1,22 +1,199 @@
 [ {
-  "key" : "xdiamond.client.profile",
-  "value" : "dev"
+  "key" : "smsService.appId",
+  "value" : "1031"
 }, {
-  "key" : "xdiamond.server.port",
-  "value" : "5678"
+  "key" : "sms.type.changeMobile",
+  "value" : ""
 }, {
-  "key" : "xdiamond.client.artifactId",
-  "value" : "xdiamond"
+  "key" : "brand.data.cacheHour",
+  "value" : "24"
 }, {
-  "key" : "xdiamond.client.version",
-  "value" : "1.0"
+  "key" : "sso.auth.appId",
+  "value" : "100006"
 }, {
-  "key" : "xdiamond.server.host",
-  "value" : "192.168.5.11"
+  "key" : "sms.type.loginNotice",
+  "value" : ""
 }, {
-  "key" : "xdiamond.client.groupId",
-  "value" : "com.hua"
+  "key" : "ws.max.try.count",
+  "value" : "3"
 }, {
-  "key" : "xdiamond.client.secretKey",
-  "value" : "123456"
+  "key" : "sms.type.createUser",
+  "value" : "253"
+}, {
+  "key" : "imageInterface.accessC.url",
+  "value" : "http://172.25.63.205:8081/images/c"
+}, {
+  "key" : "sso.system.password",
+  "value" : "12345678"
+}, {
+  "key" : "sms.type.passwordExpireTip",
+  "value" : ""
+}, {
+  "key" : "menu.data.cacheHour",
+  "value" : "24"
+}, {
+  "key" : "sso.system.username",
+  "value" : "wehotel"
+}, {
+  "key" : "login.platenoSSO.switch",
+  "value" : "false"
+}, {
+  "key" : "imageInterface.appId",
+  "value" : "1031"
+}, {
+  "key" : "wx.wechat.encKey",
+  "value" : "B532443B98283485AF4FCC4FEC2F84CABB"
+}, {
+  "key" : "sms.type.createAndModifyUser",
+  "value" : "261"
+}, {
+  "key" : "sms.expire.minute",
+  "value" : "60"
+}, {
+  "key" : "wx.appid.jinjiang",
+  "value" : "wx3e34a5a668dd55f2"
+}, {
+  "key" : "sms.timeout",
+  "value" : "30"
+}, {
+  "key" : "imageInterface.access.inner.url",
+  "value" : "http://172.25.63.205:8081/images/avatar"
+}, {
+  "key" : "kafka.topic.api.log",
+  "value" : "testuniAPIAccessLog"
+}, {
+  "key" : "admin.domain",
+  "value" : "bestwehotel.com"
+}, {
+  "key" : "log.scheduler.before.day",
+  "value" : "2"
+}, {
+  "key" : "imageInterface.uploadC.url",
+  "value" : "http://172.25.63.205:8081/images/upload/c"
+}, {
+  "key" : "sms.type.login",
+  "value" : ""
+}, {
+  "key" : "kafka.group.id",
+  "value" : "0"
+}, {
+  "key" : "sms.type.resetPassword",
+  "value" : ""
+}, {
+  "key" : "role.data.cacheHour",
+  "value" : "24"
+}, {
+  "key" : "mdm.server.url",
+  "value" : "http://172.25.63.133/uapws/service/com.yonyou.itf.mdm07.sharing.IMdSharingCenterService?wsdl"
+}, {
+  "key" : "sms.type.modifyPassword",
+  "value" : "266"
+}, {
+  "key" : "default.localHandle.pageSize",
+  "value" : "500"
+}, {
+  "key" : "mdm.client.url",
+  "value" : "http://172.25.63.133/uapws/service/com.yonyou.itf.mdm07.sharing.IMdSharingThirdPartService?wsdl"
+}, {
+  "key" : "sms.switch",
+  "value" : "false"
+}, {
+  "key" : "bt.shop.manager.stationId",
+  "value" : "100001"
+}, {
+  "key" : "store.data.cacheHour",
+  "value" : "16"
+}, {
+  "key" : "uni.resource.cacheHour",
+  "value" : "1"
+}, {
+  "key" : "store.highStars",
+  "value" : "GTC,KL,JINJIANG,RTC,ROT,GOT"
+}, {
+  "key" : "user.password.reset.url",
+  "value" : "http://172.25.62.77:8080/#/forget"
+}, {
+  "key" : "org.architecture.hulianwang.deptCode",
+  "value" : "10304"
+}, {
+  "key" : "cross.domain",
+  "value" : "true"
+}, {
+  "key" : "wx.third.publicCode.send.message.url",
+  "value" : "http://172.25.63.72:8080/wx-api/rws/sendMessage"
+}, {
+  "key" : "system.hr.switch",
+  "value" : "true"
+}, {
+  "key" : "sms.send.max.time",
+  "value" : "300"
+}, {
+  "key" : "validateCode.expireMinute",
+  "value" : "5"
+}, {
+  "key" : "sms.type.createExternalUser",
+  "value" : "368"
+}, {
+  "key" : "imageInterface.access.url",
+  "value" : "http://172.25.63.205:8081/images/avatar"
+}, {
+  "key" : "orgArchitecture.data.cacheHour",
+  "value" : "24"
+}, {
+  "key" : "sso.system.service.url",
+  "value" : "http://10.100.113.69:8080/sso-inf/cxf"
+}, {
+  "key" : "smsService.token",
+  "value" : "D78892370A31D68EDD6347269F8916DA"
+}, {
+  "key" : "api.userAuth.cacheMinute",
+  "value" : "5"
+}, {
+  "key" : "wx.third.publicCode.qrCode.url",
+  "value" : "http://172.25.63.73:8080/weixin2mqa/weixinQr/getmdtSceneQr"
+}, {
+  "key" : "kafka.bootstrap.servers",
+  "value" : "172.25.32.95:9092,172.25.32.96:9092,172.25.32.97:9092"
+}, {
+  "key" : "sms.type.bindThirdLogin",
+  "value" : ""
+}, {
+  "key" : "api.user.cacheMinute",
+  "value" : "10"
+}, {
+  "key" : "resource.cache.period",
+  "value" : "100000"
+}, {
+  "key" : "sso.token.cache.hour",
+  "value" : "1"
+}, {
+  "key" : "user.password.expire.day",
+  "value" : "90"
+}, {
+  "key" : "imageInterface.token",
+  "value" : "D78892370A31D68EDD6347269F8916DA"
+}, {
+  "key" : "wx.appid.plateno",
+  "value" : ""
+}, {
+  "key" : "user.password.history.count",
+  "value" : "4"
+}, {
+  "key" : "imageInterface.upload.url",
+  "value" : "http://172.25.63.205:8081/images/upload/avatar"
+}, {
+  "key" : "login.validate.switch",
+  "value" : "false"
+}, {
+  "key" : "job.data.cacheHour",
+  "value" : "1"
+}, {
+  "key" : "smsService.url",
+  "value" : "http://10.100.112.123:8085/socialmember-webservice-sms/sms/send"
+}, {
+  "key" : "system.su27.sync.shopManager.switch",
+  "value" : "false"
+}, {
+  "key" : "authorize.resource.switch",
+  "value" : "true"
 } ]

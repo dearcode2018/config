@@ -5,7 +5,7 @@
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.config;
+package com.hua.test;
 
 //静态导入
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -33,7 +33,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.hua.entity.ConfigVo;
-import com.hua.test.BaseTest;
 import com.hua.util.ClassPathUtil;
 import com.hua.util.FileUtil;
 import com.hua.util.JacksonUtil;
