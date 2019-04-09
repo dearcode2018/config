@@ -33,6 +33,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.ConfigChangeListener;
+import com.ctrip.framework.apollo.ConfigService;
 import com.ctrip.framework.apollo.model.ConfigChange;
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
@@ -53,17 +54,16 @@ import com.hua.test.BaseTest;
 // for Junit 5.x
 //@ExtendWith(SpringExtension.class)
 //@WebAppConfiguration(value = "src/main/webapp")
-@SpringBootTest(classes = {ApplicationStarter.class}, 
-webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = {ApplicationStarter.class})
 //@MapperScan(basePackages = {"com.hua.mapper"})
 public final class ApolloSpringBootTest extends BaseTest {
 
-	
 	@ApolloConfig
 	private Config config;
 	
 	@Resource
 	private ConfigBean configBean;
+	
 	
 	/*
 	 * 在Bean中用  @Value标注相应的属性，
@@ -71,6 +71,13 @@ public final class ApolloSpringBootTest extends BaseTest {
 	 */
 	@Value("${config_001:defaultValue001}")
 	private String testValue;	
+	
+	@Value("${a.b:defaultValue001}")
+	private String value3;	
+	
+	@Value("${a.c:defaultValue001}")
+	private String value4;	
+		
 	
 	/*
 	配置方式1: 
@@ -109,6 +116,39 @@ public final class ApolloSpringBootTest extends BaseTest {
 	 * 
 	 */
 	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testValueAnnotation4() {
+		try {
+			System.out.println(value4);
+			
+		} catch (Exception e) {
+			log.error("testValueAnnotation4 =====> ", e);
+		}
+	}		
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testValueAnnotation3() {
+		try {
+			System.out.println(value3);
+			
+		} catch (Exception e) {
+			log.error("testValueAnnotation3 =====> ", e);
+		}
+	}	
 	
 	/**
 	 * 
@@ -140,6 +180,7 @@ public final class ApolloSpringBootTest extends BaseTest {
 			/*
 			 * 使用 	@Value("${config_001:defaultValue001}")
 			 * 注入的值，在Apollo管理后台修改发布之后实时生效
+			 * 通过 apollo.autoUpdateInjectedSpringProperties=false 可以关闭此功能，默认是开启
 			 */
 			while (true)
 			{
@@ -162,12 +203,11 @@ public final class ApolloSpringBootTest extends BaseTest {
 	public void testReadConfig() {
 		try {
 			// 设置环境
-			System.setProperty("env", "DEV");
+			//System.setProperty("env", "DEV");
 			
 			String key = "config_001"; //key
 			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
 			String value = config.getProperty(key, defaultValue);
-			
 			log.info("testReadConfig =====> value = " + value);
 			
 		} catch (Exception e) {
@@ -185,7 +225,7 @@ public final class ApolloSpringBootTest extends BaseTest {
 	public void testListenEvent() {
 		try {
 			// 设置环境
-			System.setProperty("env", "DEV");
+			//System.setProperty("env", "DEV");
 			
 			String key = "config_001"; //key
 			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
@@ -229,7 +269,7 @@ public final class ApolloSpringBootTest extends BaseTest {
 			 * 标注
 			 */
 			// 设置环境
-			System.setProperty("env", "DEV");
+			//System.setProperty("env", "DEV");
 			log.info("testConfigBean =====> " + configBean.getTestValue());
 			
 		} catch (Exception e) {
