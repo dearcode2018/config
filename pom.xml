@@ -14,6 +14,7 @@
 		<module>config-core</module>		
 		<module>apollo-config</module>		
 		<module>apollo-spring</module>
+		<module>apollo-spring-boot</module>
 		<module>xdiamond</module>
 		<module>xdiamond-spring-boot</module>
 		<!--

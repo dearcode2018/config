@@ -18,7 +18,7 @@
 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
 		<property name="locations">
 			<list>				
-				<value>classpath:/conf/properties/project.properties</value>
+				<value>classpath:conf/properties/project.properties</value>
 			</list>
 		</property>
 	</bean>
