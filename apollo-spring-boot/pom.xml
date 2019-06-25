@@ -13,8 +13,9 @@
 	<packaging>jar</packaging>
 	
 	<properties>
-		<common.version>0.0.1</common.version>	
-		<apollo.client>1.0.0</apollo.client>		
+		<config.version>0.0.1</config.version>	
+		<apollo.client>1.0.0</apollo.client>
+		<apollo.openapi.version>1.1.0</apollo.openapi.version>						
 	</properties>
 
 	<!-- 使用spring boot 构建插件 运行: mvn spring-boot:run -->
@@ -31,8 +32,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.hua</groupId>
-			<artifactId>common</artifactId>
-			<version>${common.version}</version>
+			<artifactId>config-core</artifactId>
+			<version>${config.version}</version>
 		</dependency>		
 	
 	<!--  -->
@@ -45,6 +46,13 @@
 	        <groupId>com.ctrip.framework.apollo</groupId>
 	        <artifactId>apollo-client</artifactId>
 	        <version>${apollo.client}</version>
+	    </dependency>
+
+		<!-- 开放平台 -->
+	   <dependency>
+	        <groupId>com.ctrip.framework.apollo</groupId>
+	 		<artifactId>apollo-openapi</artifactId>
+ 			<version>${apollo.openapi.version}</version>
 	    </dependency>
 		
 		<!-- 测试 -->

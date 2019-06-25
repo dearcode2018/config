@@ -24,7 +24,13 @@ spring:
       additional-paths:
       - src/main/java
 
-
+# 这段配置很重要，有些Bean会提前于阿波罗初始化，所以要让配置中心初始化放在较前位置
+apollo: 
+  bootstrap:
+    enabled: true
+    # 提前配置中心的加载
+    eagerLoad: 
+      enabled: true
 
 
 

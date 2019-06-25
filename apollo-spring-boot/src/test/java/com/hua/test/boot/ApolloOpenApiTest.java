@@ -1,6 +1,6 @@
 /**
  * 描述: 
- * ApolloSpringBootTest.java
+ * ApolloOpenApiTest.java
  * 
  * @author qye.zheng
  *  version 1.0
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-import javax.annotation.Resource;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,22 +31,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.ConfigChangeListener;
-import com.ctrip.framework.apollo.ConfigService;
-import com.ctrip.framework.apollo.model.ConfigChange;
-import com.ctrip.framework.apollo.model.ConfigChangeEvent;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
+import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
+import com.ctrip.framework.apollo.openapi.dto.OpenEnvClusterDTO;
 import com.hua.ApplicationStarter;
-import com.hua.bean.ConfigBean;
 import com.hua.test.BaseTest;
+import com.hua.util.JacksonUtil;
 
 
 /**
  * 描述: 
  * 
  * @author qye.zheng
- * ApolloSpringBootTest
+ * ApolloOpenApiTest
  */
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
@@ -54,29 +50,11 @@ import com.hua.test.BaseTest;
 // for Junit 5.x
 //@ExtendWith(SpringExtension.class)
 //@WebAppConfiguration(value = "src/main/webapp")
-@SpringBootTest(classes = {ApplicationStarter.class})
+@SpringBootTest(classes = {ApplicationStarter.class}, 
+webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 //@MapperScan(basePackages = {"com.hua.mapper"})
-public final class ApolloSpringBootTest extends BaseTest {
+public final class ApolloOpenApiTest extends BaseTest {
 
-	@ApolloConfig
-	private Config config;
-	
-	@Resource
-	private ConfigBean configBean;
-	
-	/*
-	 * 在Bean中用  @Value标注相应的属性，
-	 * 默认冒号后面为默认值
-	 */
-	@Value("${config_001:defaultValue001}")
-	private String testValue;	
-	
-	@Value("${a.b:defaultValue001}")
-	private String value3;	
-	
-	@Value("${a.c:defaultValue001}")
-	private String value4;	
-		
 	
 	/*
 	配置方式1: 
@@ -114,6 +92,19 @@ public final class ApolloSpringBootTest extends BaseTest {
 	 * 将目标项目的配置复制到当前项目同一路径下
 	 * 
 	 */
+	/*
+	 * http://192.168.5.11:8070/open/manage.html
+	 * 在授权平台管理页面创建第三方应用，生成token，并进行相应的授权.
+	 * 
+	 * 
+	 * 
+	 */
+	
+	@Value("${portal.url}")
+	private String portalUrl;
+	
+	private String token = "feeaaeeb52f07bd478ab0da2ce72aa2e839b9990";
+
 	
 	/**
 	 * 
@@ -123,156 +114,15 @@ public final class ApolloSpringBootTest extends BaseTest {
 	 */
 	//@DisplayName("test")
 	@Test
-	public void testValueAnnotation4() {
+	public void testOpenApi() {
 		try {
-			System.out.println(value4);
+			ApolloOpenApiClient client = ApolloOpenApiClient.newBuilder().withPortalUrl(portalUrl).withToken(token).build();
+			
+			List<OpenEnvClusterDTO> list = client.getEnvClusterInfo("app001");
+			System.out.println(JacksonUtil.writeAsString(list.get(0)));
 			
 		} catch (Exception e) {
-			log.error("testValueAnnotation4 =====> ", e);
-		}
-	}		
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testValueAnnotation3() {
-		try {
-			System.out.println(value3);
-			
-		} catch (Exception e) {
-			log.error("testValueAnnotation3 =====> ", e);
-		}
-	}	
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testValueAnnotation() {
-		try {
-			System.out.println(testValue);
-			
-		} catch (Exception e) {
-			log.error("testValueAnnotation =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	//@DisplayName("test")
-	@Test
-	public void testValueAnnotation2() {
-		try {
-			/*
-			 * 使用 	@Value("${config_001:defaultValue001}")
-			 * 注入的值，在Apollo管理后台修改发布之后实时生效
-			 * 通过 apollo.autoUpdateInjectedSpringProperties=false 可以关闭此功能，默认是开启
-			 */
-			while (true)
-			{
-				Thread.sleep(5 * 1000);
-				System.out.println(testValue);
-			}
-			
-		} catch (Exception e) {
-			log.error("testValueAnnotation2 =====> ", e);
-		}
-	}	
-		
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testReadConfig() {
-		try {
-			// 设置环境
-			//System.setProperty("env", "DEV");
-			
-			String key = "config_001"; //key
-			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
-			String value = config.getProperty(key, defaultValue);
-			log.info("testReadConfig =====> value = " + value);
-			
-		} catch (Exception e) {
-			log.error("testReadConfig =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testListenEvent() {
-		try {
-			// 设置环境
-			//System.setProperty("env", "DEV");
-			
-			String key = "config_001"; //key
-			String defaultValue = "defaultValue"; //默认值，读取不到配置就会使用默认值，建议都加上默认值
-			ConfigChangeListener listener = new ConfigChangeListener() {
-				/**
-				 * @description 
-				 * @param changeEvent
-				 * @author qianye.zheng
-				 */
-				@Override
-				public void onChange(ConfigChangeEvent changeEvent)
-				{
-					System.out.println("Changes for namespace " + changeEvent.getNamespace());
-					for (String key : changeEvent.changedKeys())
-					{
-						ConfigChange change = changeEvent.getChange(key);
-						System.out.println(String.format("found change - key : %s, oldValue: %s, "
-								+ "newValue: %s, changeType: %s",  change.getPropertyName(), 
-								change.getOldValue(), change.getNewValue(), change.getChangeType()));
-					}
-				}
-			};
-			config.addChangeListener(listener);
-		
-			Thread.sleep(20 * 1000);
-		} catch (Exception e) {
-			log.error("testListenEvent =====> ", e);
-		}
-	}
-	
-	/** * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testConfigBean() {
-		try {
-			/*
-			 * 在Bean中响应属性中
-			 * 标注
-			 */
-			// 设置环境
-			//System.setProperty("env", "DEV");
-			log.info("testConfigBean =====> " + configBean.getTestValue());
-			
-		} catch (Exception e) {
-			log.error("testConfigBean =====> ", e);
+			log.error("testOpenApi =====> ", e);
 		}
 	}	
 	
