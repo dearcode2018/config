@@ -1,0 +1,39 @@
+Apollo Config
+
+参考: https://github.com/ctripcorp/apollo/wiki/Quick-Start
+
+1.区分环境
+
+方式1: 通过env来区分，一个管理后台可以管理多个环境
+通过 -Ddev.meta=xx -Dfat.meta=xx 来启动apollo管理后台.
+
+方式2: 通过不同集群来区分，使用同一个namespace. 
+默认集群为default
+
+方式3: 在默认(default)集群下或同一个集群下，通过namespace来区分
+默认命名空间为application(.properties)
+
+2. 启动参数
+# 指定服务地址
+-Dapollo.meta=
+# 指定环境
+-Denv=
+# 指定 命名空间，默认是 application
+apollo.bootstrap.namespaces=application,application-test
+# 指定集群
+apollo.cluster=GUANG_ZHOU
+
+
+
+
+
+9.访问
+# 管理界面
+http://ip:8070
+apollo/admin
+# eureka控制台
+http://ip:8080/
+
+
+
+

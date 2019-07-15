@@ -14,9 +14,10 @@
 		<module>config-core</module>		
 		<module>apollo-config</module>		
 		<module>apollo-spring</module>
+		<module>apollo-config-refresh</module>
 		<module>apollo-spring-boot</module>
-		<module>xdiamond</module>
-		<module>xdiamond-spring-boot</module>
+		<module>nacos-spring-cloud</module>
+		<module>nacos-config-refresh</module>
 		<!--
 		<module></module>		
 		<module></module>		

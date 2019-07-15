@@ -1,15 +1,16 @@
 @ rem ----- 信息 -----
-@ rem @filename x.bat
+@ rem @filename StopOracle.bat
 @ rem @version 1.0
-@ rem @description 
 @ rem @author qye.zheng
+@ rem @description 停止 Oracle
 
 @ rem @warning 为了防止中文环境乱码，保存文件的时候，应该保存为ANSI编码格式.
 @ rem ################################################################################
 
-
+:: 调用公共部分
+call OracleCommon.bat
 @ rem 标题
-@ title 初始化 MySql 主目录
+@ title 停止 Oracle
 @ rem ########## begin  ##########
 
 @ rem 关闭显示命令，使所有命令执行前不显示
@@ -18,20 +19,15 @@
 @ rem 打开命令显示 @ echo on
 
 @ rem ----- 变量声明区
-:: 设置 mysql 主目录
-set MYSQL_HOME=D:\"software"\"mysql-winx64"
-
-:: mysql root 明文密码
-set MYSQL_ROOT_PASSWORD=root
-
-:: 截取所在的磁盘驱动
-set diskDriver=%MYSQL_HOME:~0,2%
 
 
 @ rem ----- 程序设计区
 
-:: 进入 home 路径所在的磁盘驱动器
-%diskDriver%
+@rem 停止Oracle Listener
+net stop %oracleListener%
+
+@rem 停止Oracle Service
+net stop %oracleService%
 
 @ rem pause
 

@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- 继承 spring boot -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- spring boot的版本要和 spring cloud的版本对应起来，高版本则不支持 -->
+		<version>2.1.4.RELEASE</version>
+	</parent>
+	<artifactId>nacos-spring-cloud</artifactId>
+	<name>nacos-spring-cloud</name>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<config-core.version>0.0.1</config-core.version>
+		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>	
+		<nacos.version>0.9.0.RELEASE</nacos.version> 		
+	</properties>
+
+	<!-- 使用spring boot 构建插件 运行: mvn spring-boot:run -->
+	<build>
+		<plugins>
+			<!-- package as an executable jar -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+	
+ 		<dependency>
+			<groupId>com.hua</groupId>
+			<artifactId>config-core</artifactId>
+			<version>${config-core.version}</version>
+		</dependency>
+		
+		<!-- spring boot starter web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<!-- 把一些多余的日志依赖去除，解决日志冲突问题 -->
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>			
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>		
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jul-to-slf4j</artifactId>
+				</exclusion>	
+				<!-- 排除和log4j2冲突 -->	
+				<exclusion>
+   					 <groupId>org.apache.logging.log4j</groupId>
+ 					 <artifactId>log4j-to-slf4j</artifactId>  					 				
+				</exclusion>														
+			</exclusions>
+		</dependency>	
+		
+		<!-- 测试 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>	
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>	
+
+<!-- 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>	 -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		
+		<!-- Nacos Config -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		    <version>${nacos.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<!-- 将依赖放入 dependencyManagement 中 可以解决 spring boot 父级依赖的冲突 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>

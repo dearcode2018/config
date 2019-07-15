@@ -1,0 +1,42 @@
+
+server:
+  port: 7070
+ 
+  servlet:
+    context-path: /
+ 
+spring:
+  profiles:
+    active:
+    - dev
+
+  autoconfigure:
+    exclude:
+    - 
+
+  http:
+    log-request-details: true
+
+# spring.devtools.restart.enabled 禁用devtools自动重启功能，直接用IDE的热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths:
+      - src/main/java
+
+# 这段配置很重要，有些Bean会提前于阿波罗初始化，所以要让配置中心初始化放在较前位置
+apollo: 
+  bootstrap:
+    enabled: true
+    # 提前配置中心的加载
+    eagerLoad: 
+      enabled: true
+
+
+
+
+
+
+
+
+

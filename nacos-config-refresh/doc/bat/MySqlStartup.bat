@@ -9,7 +9,7 @@
 
 
 @ rem 标题
-@ title 初始化 MySql 主目录
+@ title 启动 MySql 服务
 @ rem ########## begin  ##########
 
 @ rem 关闭显示命令，使所有命令执行前不显示
@@ -17,26 +17,49 @@
 @ echo off
 @ rem 打开命令显示 @ echo on
 
+set scriptPath=%~dp0
+@ rem 进入脚本所在的磁盘
+%scriptPath:~0,2%
+
+@ rem 进入脚本所在的目录
+cd %scriptPath%
+
 @ rem ----- 变量声明区
-:: 设置 mysql 主目录
-set MYSQL_HOME=D:\"software"\"mysql-winx64"
+:: 设置暂停标识
+set stopFlag=false
 
-:: mysql root 明文密码
-set MYSQL_ROOT_PASSWORD=root
+:: 调用 初始化主目录
+call MySqlHome.bat
 
-:: 截取所在的磁盘驱动
-set diskDriver=%MYSQL_HOME:~0,2%
-
+:: 调用其他 bat 之后，需要重新设置标题，避免被上一个bat程序覆盖
+@ title 启动 MySql 服务
 
 @ rem ----- 程序设计区
 
-:: 进入 home 路径所在的磁盘驱动器
-%diskDriver%
+:: 成对括号可以把多行要执行的语句包围起来，else 必须和 if 分支的右括号在同一行，否则 else 将被视为新同语句
+if exist %MYSQL_HOME% (
+cd %MYSQL_HOME%
+:: 进入 bin 目录
+cd bin
+:: 执行mysql 启动命令
+:: 在命令前加上 start /b 可以让后面的命令在后台运行
+start /b mysqld -u root
+
+:: 启动指定的数据库
+:: mysql -u username -pPassword db_name
+
+:: 关闭数据库服务 (指定明文密码)
+:: mysqladmin -u root -pPassword shutdown
+) else (
+echo %MYSQL_HOME% not exists, please check!
+:: 设置暂停标识
+set stopFlag=true
+)
 
 @ rem pause
-
+if "true"=="%stopFlag%" (pause)
 @ rem
-
+:: 退出
 @ rem
 @ rem 输出提示信息
 
