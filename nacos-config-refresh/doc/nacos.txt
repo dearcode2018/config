@@ -19,5 +19,6 @@ nacos-spring-cloud-dev.yaml
 注意，Data ID一定要指定后缀名
 
 
-
+遗留问题: 加上@RefreshScope之后，启动一个进程测试是ok的，但是用junit测试是抛异常的，去掉@RefreshScope
+则junit测试可以正常，因此这2者是没有兼容的.
 

@@ -23,6 +23,9 @@ import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 /* 该类在根包(basePackage)下，则无须再指定scanBasePackages */
 @SpringBootApplication
 // 开启 Apollo 配置
+/* 指定命名空间 */
+//@EnableApolloConfig({"ymlValue.yml"})
+/* 使用默认命名空间 application.properties */
 @EnableApolloConfig
 /* 启动指定特性 */
 //@Configuration

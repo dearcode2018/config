@@ -18,8 +18,13 @@ Apollo Config
 -Dapollo.meta=
 # 指定环境
 -Denv=
-# 指定 命名空间，默认是 application
+# 指定 命名空间，默认是 application.properties
 apollo.bootstrap.namespaces=application,application-test
+指定命名空间要点
+1) apollo-client jar包版本至少1.3.0
+2) 指定方式1: @EnableApolloConfig({"ymlValue.yml"})
+3) 指定方式2: application.properties或bootstrap.properties中指定
+apollo.bootstrap.namespaces=application.yml
 # 指定集群
 apollo.cluster=GUANG_ZHOU
 
