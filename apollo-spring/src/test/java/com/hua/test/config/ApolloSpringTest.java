@@ -20,6 +20,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.junit.Ignore;
@@ -195,7 +197,7 @@ public final class ApolloSpringTest extends BaseTest {
 	@Test
 	public void testTemp() {
 		try {
-			
+			Set<String> keys = config.getPropertyNames();
 			
 		} catch (Exception e) {
 			log.error("testTemp=====> ", e);
