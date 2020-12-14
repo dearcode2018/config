@@ -29,7 +29,7 @@ apollo:
   bootstrap:
     enabled: true
     # 指定命名空间，在bootstrap.properties中指定配置没有生效，在application.yml或application.properties中配置才有效
-    namespaces: ymlValue.yml
+    #namespaces: ymlValue.yml
     # 提前配置中心的加载
     eagerLoad: 
       enabled: true

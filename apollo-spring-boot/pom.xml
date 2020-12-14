@@ -14,8 +14,7 @@
 	
 	<properties>
 		<config.version>0.0.1</config.version>	
-		<apollo.client>1.4.0</apollo.client>
-		<apollo.openapi.version>1.1.0</apollo.openapi.version>						
+		<apollo.client>1.7.0</apollo.client>
 	</properties>
 
 	<!-- 使用spring boot 构建插件 运行: mvn spring-boot:run -->
@@ -52,7 +51,7 @@
 	   <dependency>
 	        <groupId>com.ctrip.framework.apollo</groupId>
 	 		<artifactId>apollo-openapi</artifactId>
- 			<version>${apollo.openapi.version}</version>
+ 			<version>${apollo.client}</version>
 	    </dependency>
 		
 		<!-- 测试 -->
