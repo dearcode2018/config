@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hua</groupId>
 	<artifactId>config-entire</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<name>config-entire</name>
 	<description>config Maven Entire Project</description>
@@ -21,7 +21,6 @@
 		<module>apollo-spring-boot</module>
 		<module>nacos-spring-cloud</module>
 		<module>nacos-config-refresh</module>
-		<!-- <module></module> <module></module> <module></module> <module></module> -->
 	</modules>
 
 	<!-- 公共属性 -->
@@ -29,9 +28,9 @@
 		<jdk.version>1.8</jdk.version>
 		<!-- spring -->
 		<spring.version>5.1.5.RELEASE</spring.version>
-		<config.core.version>0.0.1</config.core.version>
+		<config.core.version>1.0.0</config.core.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.version>0.0.1</maven.version>
+		<maven.version>1.0.0</maven.version>
 		<maven.plugin.compiler.version>3.3</maven.plugin.compiler.version>
 		<maven.plugin.source.version>2.4</maven.plugin.source.version>
 		<maven.plugin.surefire.version>2.18.1</maven.plugin.surefire.version>
@@ -41,8 +40,146 @@
 		<maven.plugin.war.version>3.0</maven.plugin.war.version>
 		<apollo.client>1.7.0</apollo.client>
 		<jackson.version>2.12.0-rc2</jackson.version>
+		<config.core.version>1.0.0</config.core.version>
+		<common.version>1.0.0</common.version>		
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-yaml</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-properties</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>common</artifactId>
+				<version>${common.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>config-core</artifactId>
+				<version>${config.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ctrip.framework.apollo</groupId>
+				<artifactId>apollo-client</artifactId>
+				<version>${apollo.client}</version>
+			</dependency>
+
+			<!-- spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-websocket</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-oxm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-messaging</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<!-- 公共构建 -->
 	<build>
@@ -134,33 +271,24 @@
 				</configuration>
 			</plugin>
 
-			<!-- 解决 web项目pom.xml报错 -->
+			<!-- 要将源码放上去，需要加入这个插件 -->
 			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
-					<version>${maven.plugin.war.version}</version>
+					<attach>true</attach>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
 	</build>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.fasterxml.jackson.dataformat</groupId>
-				<artifactId>jackson-dataformat-yaml</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.fasterxml.jackson.dataformat</groupId>
-				<artifactId>jackson-dataformat-properties</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>		
-		
-		</dependencies>
-
-	</dependencyManagement>
 
 </project>

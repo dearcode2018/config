@@ -4,28 +4,24 @@
 	<parent>
 		<groupId>com.hua</groupId>
 		<artifactId>config-entire</artifactId>
-		<version>0.0.1</version>
+		<version>1.0.0</version>
 	</parent>	
 	<artifactId>apollo-config</artifactId>
 	<packaging>jar</packaging>
 	<name>apollo-config</name>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<config.core.version>0.0.1</config.core.version>
+
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.hua</groupId>
 			<artifactId>config-core</artifactId>
-			<version>${config.core.version}</version>
 		</dependency>
 	
 	   <dependency>
 	        <groupId>com.ctrip.framework.apollo</groupId>
 	        <artifactId>apollo-client</artifactId>
-	        <version>${apollo.client}</version>
 	    </dependency>
 		
 	</dependencies>

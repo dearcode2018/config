@@ -14,7 +14,7 @@
 	<packaging>jar</packaging>
 	
 	<properties>
-		<config-core.version>0.0.1</config-core.version>
+		<config-core.version>1.0.0</config-core.version>
 		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>	
 		<nacos.version>0.9.0.RELEASE</nacos.version>
 		<mybatis.spring.boot.version>2.0.0</mybatis.spring.boot.version>
